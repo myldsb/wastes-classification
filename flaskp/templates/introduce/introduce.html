@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id='china' style="height:800px; width: 800px;">
+	<script type="text/javascript" src='../../static/echarts.min.js'></script>
+	<script type="text/javascript" src='../../static/china.js'></script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById("china"));
+		option = {
+
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}'
+        },
+        
+        series: [{
+            name: '中国',
+            type: 'map',
+            mapType: 'china',
+            selectedMode: 'single',
+            roam: false,
+            zoom:1.2,
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data: [{
+                    name: '北京',
+                    itemStyle: {
+                        normal: {
+                            areaColor: '#D9EDE1'
+                        }
+                    }
+                },
+                {
+                    name: '天津',
+                    itemStyle: {
+                        normal: {
+                            areaColor: '#D9EDE1'
+                        }
+                    }
+                },]
+            }]
+        }
+        myChart.setOption(option, true);
+	</script>
+</div>
+{% endblock %}

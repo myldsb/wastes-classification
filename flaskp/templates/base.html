@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>垃圾分类</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/** {
+  box-sizing: border-box;
+}*/
+
+body {
+  margin: 0;
+  font: 200px;
+  background-image: url(../static/baseback.jpg);
+  /*-webkit-filter: grayscale(50%);*/
+}
+
+
+/* 头部样式 */
+.header {
+  background-color: #f1f1f1;
+  text-align: center;
+  color:  #7cfc00;
+}
+
+/* 查询框样式*/
+#search {
+  padding:  5px;
+  margin:   15px auto;  
+  width:  80%;
+  align-items:  center; 
+}
+
+
+/*submit 按钮样式*/
+.submit {
+  cursor:  pointer; 
+  color: #f2f2f2;
+  background-color: #333;
+}
+
+/*submit按钮鼠标悬浮样式*/
+.submit:hover{
+  background-color: #7cfc00;
+  color: black;
+}
+
+/* 导航条 */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+ 
+/* 导航链接 */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 0px ;
+  text-decoration: none;
+  width:  33%;
+}
+ 
+/* 链接 - 修改颜色 */
+.topnav a:hover {
+  background-color: #7cfc00;
+  color: black;
+  width:  33%;
+}
+</style>
+
+
+
+
+</head>
+<body>
+
+<div class="header">
+  <h1 style="height:1em;">垃圾分类一小步，祖国环保一大步</h1>
+</div>
+
+<form id='search'>
+  <input type="text" id="rubbish-name" style="width: 75%; height:3em;" placeholder="请输入要查询的垃圾名称">
+  <input class = 'submit' type="submit" id = "rubbish-search" style="width: 20%; height: 3em;" >
+</form>
+
+
+<div class="topnav" style=" align-conte: center">
+  <a href="{{url_for('introduce')}}">垃圾分类指南</a>
+  <a href="#">垃圾分类考试</a>
+  <a href="#">垃圾分类商城</a>
+  <!-- <a href="#">垃圾分类现状</a> -->
+</div>
+{% block content %}{% endblock %}
+
+</body>
+</html>

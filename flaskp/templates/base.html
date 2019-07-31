@@ -12,8 +12,7 @@
 body {
   margin: 0;
   font: 200px;
-  background-image: url(../static/baseback.jpg);
-  /*-webkit-filter: grayscale(50%);*/
+  /*background-image: url(../static/baseback.jpg);*/
 }
 
 
@@ -22,7 +21,22 @@ body {
   background-color: #f1f1f1;
   text-align: center;
   color:  #7cfc00;
+  padding: 15px 0;
 }
+
+.header>h1 {
+  display: inline;
+
+}
+
+img {
+  display: inline;
+  float: right;
+  margin-right: 20px;
+  border: 1px solid blue;
+  cursor: pointer;
+}
+
 
 /* 查询框样式*/
 #search {
@@ -72,13 +86,14 @@ body {
 </style>
 
 
-
-
 </head>
+
+
 <body>
 
 <div class="header">
-  <h1 style="height:1em;">垃圾分类一小步，祖国环保一大步</h1>
+  <h1 >垃圾分类一小步，祖国环保一大步</h1>
+  <img id='lulu' src="{{url_for('static', filename='portrait.png')}}">
 </div>
 
 <form id='search'>
@@ -88,12 +103,37 @@ body {
 
 
 <div class="topnav" style=" align-conte: center">
-  <a href="{{url_for('introduce')}}">垃圾分类指南</a>
+  <a href="{{url_for('guide.guide')}}">垃圾分类指南</a>
   <a href="#">垃圾分类考试</a>
   <a href="#">垃圾分类商城</a>
   <!-- <a href="#">垃圾分类现状</a> -->
 </div>
 {% block content %}{% endblock %}
+
+
+
+<!-- 功能函数 -->
+<script type="text/javascript">
+
+  function log(x) {
+    console.log(x)
+  }
+</script>
+
+<!-- 业务处理 -->
+<script type="text/javascript">
+
+  // 点击右上角头像，登出判断函数
+  document.querySelector('#lulu').onclick = function() {
+    if(confirm('确认登出？')) {
+      log('quit')
+    } else {
+      log('no!')
+    }
+  }
+
+</script>
+
 
 </body>
 </html>

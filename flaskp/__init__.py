@@ -4,17 +4,15 @@ from flask import Flask, render_template, url_for
 
 
 app = Flask(__name__)
-print(app.root_path)
+print("running path:===", app.root_path)
 
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
 	return render_template('base.html')
 
-@app.route('/introduce', methods=('GET', 'POST'))
-def introduce():
-	return render_template('/introduce/introduce.html')
+from . import auth
+app.register_blueprint(auth.bp)
 
-if __name__ == '__main__':
-	app.jinja_env.auto_reload = True
-	app.run(debug=False)
+from . import guide
+app.register_blueprint(guide.bp)

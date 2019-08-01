@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style type="text/css">
+
+/*垃圾图标显示header*/
+.index-header {
+    background-color: #f1f1f1;
+    /*height: 10%;*/
+    margin: auto 2em;
+}
+
+/*垃圾图标*/
+.index-header>img {
+    width: 10%;
+    padding: 1em 7%;
+}
+
+/*垃圾介绍段落*/
+.index-content {
+    background-color: #f1f1f1;
+    margin: 3em 2em 0 2em;
+    height: 11em;
+    font: 1em solid black;
+}
+
+/*默认显示可回收垃圾正文*/
+.index-content>*{
+    display: none;
+}
+
+.index-content>.recyclable {
+    display: block;
+}
+
+</style>
+
+<div>
+    <div class="index-header">
+        <img id='recyclable' src="{{url_for('static', filename='recyclable.png')}}">
+        <img id='harmful' src="{{url_for('static', filename='harmful.png')}}">
+        <img id='kitchen' src="{{url_for('static', filename='kitchen.png')}}">
+        <img id='non-recyclable' src="{{url_for('static', filename='non-recyclable.png')}}">
+    </div> 
+
+    <div class="index-content">
+        <p class="recyclable"><b><i>可回垃圾</i></b>&nbsp就是可以再生循环的垃圾。本身或材质可再利用的纸类、硬纸板、玻璃、塑料、金属、塑料包装，与这些材质有关的如：报纸、杂志、广告单及其它干净的纸类等皆可回收</p>
+        <ul class="recyclable"> <b><i>投放注意事项</i></b>
+            <li><i>尽量保持清洁干燥，避免污染</i></li>
+            <li><i>立体包装物应清空内容物</i></li>
+            <li><i>废玻璃制品应轻投轻放</i></li>
+            <li><i>有尖锐边角的应包裹后投放</i></li>
+        </ul>
+
+        <p class="harmful"><b><i>有害垃圾</i></b>&nbsp有害垃圾指废电池、废灯管、废药品、废油漆及其容器等对人体健康或者自然环境造成直接或者潜在危害的生活废弃物。
+常见包括废电池、废荧光灯管、废灯泡、废水银温度计、废油漆桶、过期药品等。有害有毒垃圾需特殊正确的方法安全处理。</p>
+        <ul class="harmful"> <b><i>投放注意事项</i></b>
+            <li><i>轻轻投放</i></li>
+            <li><i>废灯管等易破损的有害垃圾应连带包装或包裹后投放</i></li>
+            <li><i>废弃药品宜连带包装一并投放</i></li>
+            <li><i>杀虫剂等压力罐装容器，应排空内容物后投放</i></li>
+        </ul>
+
+        <p class="kitchen"><b><i>厨余垃圾</i></b>&nbsp厨余垃圾是指居民日常生活及食品加工、饮食服务、单位供餐等活动中产生的垃圾，包括丢弃不用的菜叶、剩菜、剩饭、果皮、蛋壳、茶渣、骨头等，其主要来源为家庭厨房、餐厅、饭店、食堂、市场及其他与食品加工有关的行业</p>
+        <ul class="kitchen"> <b><i>投放注意事项</i></b>
+            <li><i>投放前尽量沥干水分</i></li>
+            <li><i>有包装物的湿垃圾应将包装物去除后分类投放</i></li>
+            <li><i>包装物应投放到对应的可回收物或干垃圾收集容器</i></li>
+            <li><i>盛放湿垃圾的容器，如塑料袋等，在投放时应予去除</i></li>
+        </ul>
+
+        <p class="non-recyclable"><b><i>不可回收垃圾</i></b>&nbsp不可回收垃圾指除可回收垃圾之外的垃圾，常见的有在自然条件下易分解的垃圾，如果皮、菜叶、剩菜剩饭、花草树枝树叶等。</p>
+        <ul class="non-recyclable"> <b><i>投放注意事项</i></b>
+            <li><i>投入干垃圾收集容器</i></li>
+            <li><i>保持周边环境整洁</i></li>
+        </ul>
+    </div>       
+</div>
+
+
+<script type="text/javascript">
+
+    // 传入垃圾图标id名称，显示其对应的正文介绍内容，隐藏其余内容
+    function index_click(name){
+        document.querySelector('#'+name).onclick = function() {
+            for (let i of document.querySelector('.index-content').children){
+                if (i.getAttribute('class') === name){
+                    i.style.display='block'}else{
+                        i.style.display='none'
+                    }
+                }
+
+            }
+        }
+
+    index_click('recyclable')
+    index_click('harmful')
+    index_click('kitchen')
+    index_click('non-recyclable')
+</script>
+
+{% endblock %}

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0f903b-b91d-422d-849c-581311b6f35c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flaskp/templates/auth/auth.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskp/templates/exam/exam.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskp/templates/mall/mall.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flaskp/templates/search/search.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskp/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskp/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskp/templates/introduce/introduce.html" beforeDir="false" />
-    </list>
+    <list default="true" id="bd0f903b-b91d-422d-849c-581311b6f35c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

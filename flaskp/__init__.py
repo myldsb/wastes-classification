@@ -2,19 +2,19 @@ import os
 from flask import Flask, render_template, url_for
 
 
-def init_app():
-	app = Flask(__name__)
-	print("running path:===", app.root_path)
+app = Flask(__name__)
+print("running path:===", app.root_path)
 
 
-	@app.route('/', methods=('GET', 'POST'))
-	def index():
-		return render_template('index.html')
+@app.route('/', methods=('GET', 'POST'))
+def index():
+	return render_template('index.html')
 
-	from . import auth
-	app.register_blueprint(auth.bp)
+from . import records
 
-	from . import guide
-	app.register_blueprint(guide.bp)
+from . import auth
+app.register_blueprint(auth.bp)
 
-	return app
+from . import guide
+app.register_blueprint(guide.bp)
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>垃圾分类</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+	h1 {
+		color: #7cfc00;
+		text-align: center;
+		margin: 3em auto 1em auto;
+	}
+
+	div {
+		margin:0 auto;
+		width:22%;
+		text-align: center;
+		border:1px solid black;
+		background-color: #f1f1f1;
+	}
+
+	a {
+		display: inline-block;
+		margin: 1em auto;
+	}
+
+	form { 
+		width:90%;
+		margin: 1em auto; 
+		display: flex; 
+		flex-direction: column; 
+	}
+
+</style>
+
+<body>
+	<h1>Welcome!bro</h1>
+	<div>
+		<a id='register' href="#">Register</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a id='login' href="#">Login</a>
+		<form method="post">
+		    <label for="username">Username</label>
+		    <input name="username" id="username" required>
+		    <label for="password">Password</label>
+		    <input type="password" name="password" id="password" required>
+		    <input id='auth_submit' type="submit" value='login'>
+		</form>
+	</div>
+
+
+	<script type="text/javascript">
+		function auth_main(){
+			for (let i of document.querySelectorAll('a')){
+				i.onclick = function(){
+				document.querySelector('#auth_submit').value=i.text
+			}
+			}
+		}
+		auth_main()
+
+	</script>
+
+</body>

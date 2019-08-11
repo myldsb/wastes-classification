@@ -1,51 +1,99 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id='china' style="height:800px; width: 800px;">
-	<script type="text/javascript" src='../../static/echarts.min.js'></script>
-	<script type="text/javascript" src='../../static/china.js'></script>
-	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById("china"));
-		option = {
 
-        tooltip: {
-            trigger: 'item',
-            formatter: '{b}'
-        },
-        
-        series: [{
-            name: '中国',
-            type: 'map',
-            mapType: 'china',
-            selectedMode: 'single',
-            roam: false,
-            zoom:1.2,
-            label: {
-                normal: {
-                    show: true
+<style>
+    div {
+        height: 90%;
+    }
+
+    {#全国垃圾分类严重性示意图#}
+    #china {
+        display: inline-block;
+        width: 40%;
+    }
+
+    {#全国垃圾分类示意图标题#}
+    legend {
+        font: 30px solid red;
+        color: red;
+        margin: 1em auto;
+        text-align: center;
+    }
+
+    {#全国垃圾分类严重性地图#}
+    #china_map {
+        margin: 2em auto 2em 2em;
+
+    }
+
+    {#垃圾分类介绍小视频#}
+    #garbage_introduce {
+        display: inline-block;
+        width: 40%;
+        margin: 2em 4em 2em 12em;
+    }
+
+
+</style>
+
+<div>
+    <div id="china">
+        <legend><i><b>全国垃圾分类严重性示意图</b></i></legend>
+        <div id='china_map'>
+            <script type="text/javascript" src='../../static/echarts.min.js'></script>
+            <script type="text/javascript" src='../../static/china.js'></script>
+            <script type="text/javascript">
+                var myChart = echarts.init(document.getElementById("china_map"));
+                option = {
+
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}'
                 },
-                emphasis: {
-                    show: true
+
+                series: [{
+                    name: '中国',
+                    type: 'map',
+                    mapType: 'china',
+                    selectedMode: 'single',
+                    roam: false,
+                    zoom:1.2,
+                    label: {
+                        normal: {
+                            show: true
+                        },
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    data: [{
+                            name: '北京',
+                            itemStyle: {
+                                normal: {
+                                    areaColor: 'red'
+                                }
+                            }
+                        },
+                        {
+                            name: '山西',
+                            itemStyle: {
+                                normal: {
+                                    areaColor: 'green'
+                                }
+                            }
+                        },]
+                    }]
                 }
-            },
-            data: [{
-                    name: '北京',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#D9EDE1'
-                        }
-                    }
-                },
-                {
-                    name: '天津',
-                    itemStyle: {
-                        normal: {
-                            areaColor: '#D9EDE1'
-                        }
-                    }
-                },]
-            }]
-        }
-        myChart.setOption(option, true);
-	</script>
+                myChart.setOption(option, true);
+            </script>
+        </div>
+    </div>
+
+    <div id="garbage_introduce">
+        <legend><i><b>教你如何垃圾分类</b></i></legend>
+        <video   width="540" height="360" controls="controls">
+        </video>
+    </div>
 </div>
+
 {% endblock %}

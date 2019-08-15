@@ -29,15 +29,41 @@ body {
 
 }
 
-{#头像样式#}
-.header>    img {
+
+/*头像样式*/
+/*绝对位置*/
+.header>ul{
+    z-index: 999;
+    right: 6em;
+    top: 1em;
+    position: absolute;
+    display: inline-block;
+
+
+}
+
+.header> ul> img {
     width: 50px;
     border-radius: 50px;
-  display: inline;
-  float: right;
-  margin-right: 20px;
-  border: 1px solid #7cfc00;
-  cursor: pointer;
+    border: 1px solid #7cfc00;
+    cursor: pointer;
+}
+
+/*头像样式*/
+/*#customer {
+    float: right;
+}*/
+
+/*头像下拉框样式*/
+#customer li {
+    margin-bottom: 0.3em;
+    padding: 10px 0;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    /*margin-right: 100px;*/
+    color:black;
+    /*z-index: 999; */
+    display: none;
 }
 
 
@@ -49,7 +75,7 @@ body {
   align-items:  center; 
 }
 
-{#查询框样式#}
+/*查询框样式*/
 #search > input{
     border-radius: 30px;
 }
@@ -95,15 +121,13 @@ body {
 
 .content{
     margin: 5px 3%;
-    {#width: 100%;#}
     height: 500px;
     border-radius: 30px;
     border: 2px solid olivedrab;
+
 }
 
 </style>
-
-
 </head>
 
 
@@ -111,8 +135,13 @@ body {
 
 <div class="header">
   <h1 >垃圾分类一小步，祖国环保一大步</h1>
-  <img id='lulu' src="{{url_for('static', filename='portrait.png')}}">
+  <ul id="customer" style="float: right;"><img id='portrait' src="{{url_for('static', filename='portrait.png')}}">
+    <li id="notice">通知</li>
+    <li id="point">积分</li>
+    <li id="logout">登出</li>
+  </ul>
 </div>
+
 
 <form id='search'>
   <input type="text" id="rubbish-name" style="width: 75%; height:3em;" placeholder="请输入要查询的垃圾名称">
@@ -133,26 +162,43 @@ body {
 
 
 
+<!-- 业务代码 -->
+<script type="text/javascript">
+
+  // 点击右上角头像，登出判断函数
+    var flag = true
+    // document.querySelector('.header').appendChild(document.querySelector('#user'))
+    /*document.querySelector('#portrait').onclick = function() {
+        flag=!flag
+        flag===true?document.querySelector('#user').style.display='block': document.querySelector('#user').style.display='none';
+  }
+*/
+</script>
+
+<script type="text/javascript">
+    var flag = false
+    document.querySelector('#customer').onclick = function() {
+        flag = !flag
+        if (flag) {
+            document.querySelector('#notice').style.display='block'
+            document.querySelector('#point').style.display='block'
+            document.querySelector('#logout').style.display='block';
+        }else {
+            document.querySelector('#notice').style.display='none'
+            document.querySelector('#point').style.display='none'
+            document.querySelector('#logout').style.display='none';
+        }
+        
+  } 
+</script>
+
+
 <!-- 功能函数 -->
 <script type="text/javascript">
 
   function log(x) {
     console.log(x)
   }
-</script>
-
-<!-- 业务处理 -->
-<script type="text/javascript">
-
-  // 点击右上角头像，登出判断函数
-  document.querySelector('#lulu').onclick = function() {
-    if(confirm('确认登出？')) {
-      log('quit')
-    } else {
-      log('no!')
-    }
-  }
-
 </script>
 
 

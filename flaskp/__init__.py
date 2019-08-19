@@ -18,3 +18,6 @@ app.register_blueprint(auth.bp)
 from . import guide
 app.register_blueprint(guide.bp)
 
+from . import search
+app.register_blueprint(search.bp)
+

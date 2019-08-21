@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.css"></script>
+<script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 /** {
   box-sizing: border-box;
@@ -179,20 +179,23 @@ body {
 </script>
 
 <script type="text/javascript">
-    var flag = false
-    document.querySelector('#customer').onclick = function() {
-        flag = !flag
-        if (flag) {
-            document.querySelector('#notice').style.display='block'
-            document.querySelector('#point').style.display='block'
-            document.querySelector('#logout').style.display='block';
-        }else {
-            document.querySelector('#notice').style.display='none'
-            document.querySelector('#point').style.display='none'
-            document.querySelector('#logout').style.display='none';
-        }
-        
-  } 
+    function personal_data() {
+        let flag = false
+        document.querySelector('#customer').onclick = function() {
+            flag = !flag
+            if (flag) {
+                document.querySelector('#notice').style.display='block'
+                document.querySelector('#point').style.display='block'
+                document.querySelector('#logout').style.display='block';
+            }else {
+                document.querySelector('#notice').style.display='none'
+                document.querySelector('#point').style.display='none'
+                document.querySelector('#logout').style.display='none';
+            }
+            
+      } 
+}
+personal_data()
 </script>
 
 

@@ -28,11 +28,32 @@
 	text-align: center;
 	display: inline-block;
 	position: absolute;
-	top:50%;
+	top:40%;
 }
 
 #new_event a {
 	cursor: pointer;
+}
+
+.bs-example {
+	background-color:  #f1f1f1;
+	width: 20%;
+	height:100px;
+	position: absolute;
+	top:60%;
+	right:12%;
+	z-index: 1;
+}
+
+#new_event_form {
+	padding: 100px 100px 10px;
+	display: none;
+}
+
+.add_new_event_button {
+	width:100px!important;
+	float:left;
+	margin-left: 30px;
 }
 
 </style>
@@ -59,14 +80,58 @@
 		</ul>
 	</div>
 	<div id="new_event">
-		<p>没有找到对应的分类？赶紧点击<a>这里</a>添加吧</p>
+		<p>没有找到对应的分类？赶紧点击<a id="show_new_event_form">这里</a>添加吧</p>
 	</div>
+	<div id="new_event_form" >
+    <form class="bs-example" role="form">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">垃圾</span>
+            <input type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
+        </div>
+        <br>
+        <div class="input-group input-group-lg">
+            <label class="input-group-addon">类别</label>
+            <select class="form-control">
+                <option>可回收垃圾</option>
+                <option>有害垃圾</option>
+                <option>厨余垃圾</option>
+                <option>不可回收垃圾</option>
+            </select>
+        </div>
+        <br>
+        <div class="input-group input-group-lg">
+            <input type="submit" class="form-control add_new_event_button" style="float:left">
+            <input type="submit" class="form-control add_new_event_button" value="取消" style="float:left">
+        </div>
+    </form>
+</div>
 
 
 </div>
 
 <script type="text/javascript">
-	
+	function add_new_event() {
+		let flag = false;
+		$('#show_new_event_form').click(function() {
+			flag = !flag
+			if (flag){
+				$('#new_event_form').css('display', 'block')
+			}
+			else{
+				$('#new_event_form').css('display', 'none')
+			}
+		})
+	}
+
+	function submit_or_cancel() {
+		$('.add_new_event_button').click(function() {
+			$('#new_event_form').css('display', 'none')
+			flag = flase
+		})
+	}
+
+	add_new_event()
+	submit_or_cancel()
 </script>
 
 

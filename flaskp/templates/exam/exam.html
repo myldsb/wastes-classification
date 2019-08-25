@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style type="text/css">
+
+#exam_paper{
+	text-align: center;
+	padding:8em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#exam_paper label{
+	font: 1.5em solid;
+}
+
+#exam_paper> label {
+	display: block;
+}
+
+
+#exam_paper>div> input{
+	width: 100px;
+	float: left;
+}
+
+
+</style>
+
+<div>
+	<div id="exam_paper">
+		<label>1.中国地大物博，进行垃圾分类就是无病呻吟</label>
+		<label><input type="radio" name="A" value="对">对</label>
+		<label><input type="radio" name="A" value="对">错</label>
+
+		<ul class="pagination">
+		    <li><a href="#">&laquo;</a></li>
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		    <li><a href="#">&raquo;</a></li>
+		</ul>
+		<div>
+			<input type="submit" class="form-control">
+	        <input type="submit" class="form-control" value="取消">
+	    </div>
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+
+{% endblock %}

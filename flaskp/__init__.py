@@ -21,3 +21,6 @@ app.register_blueprint(guide.bp)
 from . import search
 app.register_blueprint(search.bp)
 
+from . import  exam
+app.register_blueprint(exam.bp)
+

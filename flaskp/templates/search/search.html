@@ -3,6 +3,7 @@
 
 <style type="text/css">
 
+/*查询结果与页码div*/
 #search-res {
 	float: left;
 	width:70%;
@@ -11,18 +12,21 @@
 	text-align: center;
 }
 
+/*查询结果*/
 .search-data {
 	text-align: center;
 	list-style-type: none;
 	height: 400px;
 }
 
+/*查询结果页码*/
 .search-data > li {
 	margin:1em 0;
 	font-size: 1.5em;
 }
 
-#new_event {
+/*新增垃圾分类与功能导航div*/
+#new_event, #navigation {
 	width:20%;
 	font: 1.5em solid black;
 	text-align: center;
@@ -31,34 +35,54 @@
 	top:40%;
 }
 
-#new_event a {
+/*新增垃圾分类div*/
+#new_event {
+	top: 40%;
+}
+
+/*垃圾点导航div*/
+#navigation {
+	top: 60%;
+}
+
+/*新增垃圾分类与功能导航链接div*/
+#new_event a, #navigation a {
 	cursor: pointer;
 }
 
-.bs-example {
-	background-color:  #f1f1f1;
-	width: 20%;
-	height:100px;
-	position: absolute;
-	top:60%;
-	right:12%;
-	z-index: 1;
-}
+/*新增垃圾分类弹出框,点击相应链接后弹出*/
 
-#new_event_form {
-	padding: 100px 100px 10px;
-	display: none;
-}
+	/*新增垃圾分类弹出框div*/
+	#new_event_form {
+		padding: 100px 100px 10px;
+		display: none;
+	}
 
-.add_new_event_button {
-	width:100px!important;
-	float:left;
-	margin-left: 30px;
-}
+	/*新增垃圾分类弹出框form表单div*/
+	.bs-example {
+		background-color:  #f1f1f1;
+		width: 20%;
+		height:100px;
+		position: absolute;
+		top:60%;
+		right:12%;
+		z-index: 1;
+	}
+
+	/*新增垃圾分类弹出框form表单提交与取消input*/
+	.add_new_event_button {
+		width:100px!important;
+		float:left;
+		margin-left: 30px;
+	}
+
+/*垃圾分类点路线导航样式,点击按钮后跳转*/
 
 </style>
 
 <div>
+
+	<!-- 查询结果与页码显示 -->
 	<div id="search-res">
 		<ul class="search-data">
 		    <li>西瓜霜[有害垃圾]</li>
@@ -79,37 +103,43 @@
 		    <li><a href="#">&raquo;</a></li>
 		</ul>
 	</div>
+
+	<!-- 新增垃圾分类条目与查询垃圾分类点导航图入口链接 -->
 	<div id="new_event">
-		<p>没有找到对应的分类？赶紧点击<a id="show_new_event_form">这里</a>添加吧</p>
+		<p>没有找到对应的分类？赶紧点击<a id="show_new_event_form">这里</a>添加</p>
 	</div>
+	<div id="navigation">
+		<p>不知道最近的垃圾分类点在哪里？赶紧点击<a id="nav">这里</a>获取</p>
+	</div>
+
+	<!-- 新增垃圾分类条目,在点击#show_new_event_form链接时弹出 -->
 	<div id="new_event_form" >
-    <form class="bs-example" role="form">
-        <div class="input-group input-group-lg">
-            <span class="input-group-addon">垃圾</span>
-            <input type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
-        </div>
-        <br>
-        <div class="input-group input-group-lg">
-            <label class="input-group-addon">类别</label>
-            <select class="form-control">
-                <option>可回收垃圾</option>
-                <option>有害垃圾</option>
-                <option>厨余垃圾</option>
-                <option>不可回收垃圾</option>
-            </select>
-        </div>
-        <br>
-        <div class="input-group input-group-lg">
-            <input type="submit" class="form-control add_new_event_button" style="float:left">
-            <input type="submit" class="form-control add_new_event_button" value="取消" style="float:left">
-        </div>
-    </form>
-</div>
+	    <form class="bs-example" role="form">
+	        <div class="input-group input-group-lg">
+	            <span class="input-group-addon">垃圾</span>
+	            <input type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
+	        </div>
+	        <div class="input-group input-group-lg">
+	            <label class="input-group-addon">类别</label>
+	            <select class="form-control">
+	                <option>可回收垃圾</option>
+	                <option>有害垃圾</option>
+	                <option>厨余垃圾</option>
+	                <option>不可回收垃圾</option>
+	            </select>
+	        </div>
+	        <div class="input-group input-group-lg">
+	            <input type="submit" class="form-control add_new_event_button">
+	            <input type="submit" class="form-control add_new_event_button" value="取消">
+	        </div>
+	    </form>
+	</div>
 
 
 </div>
 
 <script type="text/javascript">
+	// 点击相应链接,弹出新增垃圾分类条目面板
 	function add_new_event() {
 		let flag = false;
 		$('#show_new_event_form').click(function() {

@@ -7,6 +7,7 @@
 <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值"></script>
 <style>
 /** {
   box-sizing: border-box;
@@ -61,7 +62,7 @@ body {
 #customer li {
     margin-bottom: 0.3em;
     padding: 10px 0;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     background-color: #f1f1f1;
     /*margin-right: 100px;*/
     color:black;
@@ -79,10 +80,14 @@ body {
 }
 
 /*查询框样式*/
-#search > input{
-    border-radius: 30px;
+#rubbish-name {
+    width: 75%; 
+    height:3em;
 }
 
+#search:nth-child(2){
+    border-radius: 30px;
+}
 
 /*submit 按钮样式*/
 .submit {
@@ -147,14 +152,14 @@ body {
 
 
 <form id='search'>
-  <input type="text" id="rubbish-name" style="width: 75%; height:3em;" placeholder="请输入要查询的垃圾名称">
+  <input type="text" id="rubbish-name" placeholder="请输入要查询的垃圾名称">
   <input class = 'submit' type="submit" id = "rubbish-search" style="width: 20%; height: 3em;" >
 </form>
 
 
-<div class="topnav" style=" align-conte: center">
+<div class="topnav">
   <a href="{{url_for('guide.guide')}}">垃圾分类指南</a>
-  <a href="#">垃圾分类考试</a>
+  <a href="{{url_for('exam.exam')}}">垃圾分类考试</a>
   <a href="#">垃圾分类商城</a>
   <!-- <a href="#">垃圾分类现状</a> -->
 </div>
@@ -166,17 +171,6 @@ body {
 
 
 <!-- 业务代码 -->
-<script type="text/javascript">
-
-  // 点击右上角头像，登出判断函数
-    var flag = true
-    // document.querySelector('.header').appendChild(document.querySelector('#user'))
-    /*document.querySelector('#portrait').onclick = function() {
-        flag=!flag
-        flag===true?document.querySelector('#user').style.display='block': document.querySelector('#user').style.display='none';
-  }
-*/
-</script>
 
 <script type="text/javascript">
     function personal_data() {

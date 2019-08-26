@@ -78,7 +78,26 @@
 
 /*垃圾分类点路线导航样式,点击按钮后跳转*/
 
+	#nav_waste_container {
+		display: none;
+		position: absolute;
+		height:30em;
+		width: 100em;
+		z-index: 3;
+	}
+
+	.btn{	
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        width: 11em;
+        z-index: 5;
+	}
+
+
 </style>
+
 
 <div>
 
@@ -109,7 +128,7 @@
 		<p>没有找到对应的分类？赶紧点击<a id="show_new_event_form">这里</a>添加</p>
 	</div>
 	<div id="navigation">
-		<p>不知道最近的垃圾分类点在哪里？赶紧点击<a id="nav">这里</a>获取</p>
+		<p>不知道最近的垃圾分类点在哪里？赶紧点击<a id="show_nav_waste_container">这里</a>获取</p>
 	</div>
 
 	<!-- 新增垃圾分类条目,在点击#show_new_event_form链接时弹出 -->
@@ -135,33 +154,99 @@
 	    </form>
 	</div>
 
+	<!-- 查询垃圾分类投放点时弹出 -->
+	<div id="nav_waste_container" >
+		<input type='button' id='callApp' class='btn' value='点击调起高德地图'/>
+		<input type='button' id='closeApp' class="btn" style="position: absolute;
+																height: 30px;
+														        top: 20px;
+														        right: 20px;
+														        background-color: white;
+														        width: 11em;
+														        z-index: 9;" 
+														        value='点击关闭高德地图'/>
+
+	</div>
+
+
 
 </div>
 
-<script type="text/javascript">
-	// 点击相应链接,弹出新增垃圾分类条目面板
-	function add_new_event() {
-		let flag = false;
-		$('#show_new_event_form').click(function() {
-			flag = !flag
-			if (flag){
-				$('#new_event_form').css('display', 'block')
-			}
-			else{
-				$('#new_event_form').css('display', 'none')
-			}
-		})
-	}
+<!-- 加载高德地图API -->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=45fa813aceec535a29a8834164cfe7ac"></script>
 
-	function submit_or_cancel() {
-		$('.add_new_event_button').click(function() {
-			$('#new_event_form').css('display', 'none')
-			flag = flase
+<script type="text/javascript">
+	// 新增垃圾分类条目逻辑
+		// 点击相应链接,弹出新增垃圾分类条目面板
+		function add_new_event() {
+			let flag = false;
+			$('#show_new_event_form').click(function() {
+				flag = !flag
+				if (flag){
+					$('#new_event_form').css('display', 'block')
+				}
+				else{
+					$('#new_event_form').css('display', 'none')
+				}
+			})
+		}
+
+		function submit_or_cancel() {
+			$('.add_new_event_button').click(function() {
+				$('#new_event_form').css('display', 'none')
+				flag = flase
+			})
+		}
+
+
+	// 垃圾分类点地图导航逻辑
+	function getAMap() {
+		var map = new AMap.Map("nav_waste_container", {
+			 resizeEnable: true, //是否监控地图容器尺寸变化
+		      // zoom: 12, //初始地图级别
+		      showIndoorMap: false //关闭室内地图
+		});
+	        AMap.plugin(["AMap.Walking"], function() {
+	            var drivingOption = {
+	                map:map
+	            };
+	            
+	            var walking = new AMap.Walking(drivingOption); //构造驾车导航类
+	            //根据起终点坐标规划驾车路线
+	            walking.search([{keyword:'西北旺公交站',city:'010'},{keyword:'垃圾分类点',city:'010'}], function(status, result){
+	                button.onclick = function(){
+	                    walking.searchOnAMAP({
+	                        origin:result.origin,
+	                        destination:result.destination,
+	                        autoFitView: false
+	                    });
+	                } 
+	            });
+	            
+	        });
+	        
+	        var button = document.getElementById('callApp');
+	        if(AMap.UA.mobile){
+	            document.getElementsByClassName('info')[0].style.display='none';
+	            button.style.fontSize = '16px';
+	        }else{
+	            button.style.marginRight = '10px';
+	        }
+	    }
+
+	function invokeAMap(){
+		$('#show_nav_waste_container').click(function(){
+			$('#nav_waste_container').css('display', 'block')
 		})
-	}
+		$('#closeApp').click(function() {
+			$('#nav_waste_container').css('display', 'none')
+			})
+		}
 
 	add_new_event()
 	submit_or_cancel()
+	getAMap()
+	invokeAMap()
 </script>
 
 

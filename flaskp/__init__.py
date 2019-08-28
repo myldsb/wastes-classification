@@ -10,6 +10,11 @@ print("running path:===", app.root_path)
 def index():
 	return render_template('index.html')
 
+# db conn
+from .db_conn import *
+
+from . import help
+
 from . import records
 
 from . import auth

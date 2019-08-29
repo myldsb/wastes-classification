@@ -4,20 +4,20 @@ from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 print("running path:===", app.root_path)
+app.config['SECRET_KEY'] = 'secert_key'
+
+
+from .auth import login_required
 
 
 @app.route('/', methods=('GET', 'POST'))
+@login_required
 def index():
 	return render_template('index.html')
 
-# db conn
-from .db_conn import *
-
-from . import help
-
 from . import records
 
-from . import auth
+# from . import auth
 app.register_blueprint(auth.bp)
 
 from . import guide

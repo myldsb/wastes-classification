@@ -55,7 +55,7 @@
 	}
 
 	/*all input button */
-	input, button{
+	input{
 		height: 2em;
 		margin: .5em;
 		border-radius: 5px;
@@ -67,23 +67,35 @@
 		color: white;
 		border-radius: 8px;
 		margin: 1em 0;
+        text-align: center;
 	}
+
+    .flash {
+        height: 7px;
+        font: 1px solid red;
+        color: red;
+        padding: 1em;
+    }
 
 </style>
 
 <body>
 	<img src="{{url_for('static', filename='welcome.jfif')}}">
 	<h1>Welcome!</h1>
+
 	<div>
 		<a id='register' href="#">Register</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a id='login' href="#">Login</a>
-		<form method="post">
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+		<form method="post" οnsubmit="return false;">
 		    <label for="username">Username</label>
-		    <input name="username" id="username" required>
+		    <input name="username" id="username"  required/>
 		    <label for="password">Password</label>
-		    <input type="password" name="password" id="password" required>
-            <button id='auth_submit' name="islogin" value="Login">Login</button>
+		    <input type="password" name="password" id="password">
+            <input id='auth_submit' name="islogin" value="Login" type="submit">
 		</form>
 	</div>
 
@@ -97,6 +109,8 @@
 				}
 			}
 		}
+
+		{#$('#auth_submit').click(function(data){})#}
 
 		auth_main()
 

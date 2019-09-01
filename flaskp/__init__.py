@@ -1,10 +1,12 @@
 import os
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 
 
 app = Flask(__name__)
 print("running path:===", app.root_path)
-app.config['SECRET_KEY'] = 'secert_key'
+
+from .config import condig_obj
+app.config.from_object(condig_obj)
 
 
 from .auth import login_required

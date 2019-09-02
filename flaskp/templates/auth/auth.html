@@ -104,8 +104,8 @@
 		function auth_main(){
 			for (let i of document.querySelectorAll('a')){
 				i.onclick = function(){
-				$('#auth_submit').text(i.text)
-				$('#auth_submit').val(i.text)
+				    console.log(i.text)
+				$('#auth_submit').val(i.text);
 				}
 			}
 		}

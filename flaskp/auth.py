@@ -14,8 +14,9 @@ from flask import session
 from flask import redirect
 from flask import url_for
 from flask import current_app
+from werkzeug.security import check_password_hash, generate_password_hash
 
-from .model import user, User
+from .model import User
 from .help import Results
 
 
@@ -25,7 +26,8 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/', methods=['GET','POST'])
 def login():
 	res = Results()
-	db_auth = {u.name: u.password for u in user}
+	db_auth = {u.name: u.password for u in User.objects.all()}
+	print('db_auth', db_auth)
 	if request.method == 'POST':
 		print(request.form)
 		username = request.form['username']
@@ -34,16 +36,11 @@ def login():
 
 		if is_login:
 			# login
-			print(111)
-			print(db_auth)
 			if username not in db_auth:
-				flash('用户名错误或者不存在')
-				# return res.set_res(False, msg='Incorrect username, please recheck')
-			elif password != db_auth[username]:
-				print(222)
-				return res.set_res(False, msg='Incorrcet password, please recheck')
+				flash('用户不存在，请先注册或者核实后重新登录')
+			elif not check_password_hash(db_auth[username], password):
+				flash('用户名或者密码错误，请核实后重新输入')
 			else:
-				print(333)
 				session['username'] = username
 				session['password'] = password
 				g.username = username
@@ -51,11 +48,15 @@ def login():
 		else:
 			# register
 			if username not in db_auth:
-				User(name=username, password=password, group=current_app.config['GUEST_GROUP']).save()
-				# return res.set_res(True, msg={'username':username, 'password':password})
-				flash('注册成功')
+				print(username, password)
+				try:
+					User(name=username, password=generate_password_hash(password), group=current_app.config['GUEST_GROUP']).save()
+					flash('注册成功，请登录')
+				except Exception as e:
+					print(e)
+					flash('注册失败，请联系管理员')
 			else:
-				return res.set_res(False, msg='username already exists, please reenter')
+				flash('用户名已存在，请重新输入')
 
 	return	render_template('/auth/auth.html')
 
@@ -66,10 +67,9 @@ def logout():
 	return redirect(url_for('auth.login'))
 
 
-
 def login_required(view):
 	print('login_required')
-	print('view', view.__name__)
+	print('view function', view.__name__)
 	@functools.wraps(view)
 	def wrapped_view(*args, **kwargs):
 		print('login_required=====')

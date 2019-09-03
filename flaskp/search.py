@@ -14,6 +14,7 @@ def index():
 		print(123123123123)
 		flash('没有检测到输入，请输入要查询的垃圾名称')
 		return render_template('index.html')
-	# waste_classfication = {i.name: i.catefory for i in WasteClassfication.objects(version='stable')
-	# 					   if search_name in i.name}
-	return	render_template('/search/search.html')
+	waste_filter = ['%s[%s]'%(i.name,i.category) for i in WasteClassfication.objects(version='stable')
+						   if search_name in i.name]
+	print(waste_filter)
+	return	render_template('/search/search.html', waste_filter=waste_filter)

@@ -137,11 +137,11 @@
 	    <form class="bs-example" role="form">
 	        <div class="input-group input-group-lg">
 	            <span class="input-group-addon">垃圾</span>
-	            <input type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
+	            <input id="add_new_waste_name" type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
 	        </div>
 	        <div class="input-group input-group-lg">
 	            <label class="input-group-addon">类别</label>
-	            <select class="form-control">
+	            <select id='add_new_waste_class' class="form-control">
 	                <option>可回收垃圾</option>
 	                <option>有害垃圾</option>
 	                <option>厨余垃圾</option>
@@ -149,8 +149,8 @@
 	            </select>
 	        </div>
 	        <div class="input-group input-group-lg">
-	            <input type="submit" class="form-control add_new_event_button">
-	            <input type="submit" class="form-control add_new_event_button" value="取消">
+	            <input id="add_new_submit" type="submit" class="form-control add_new_event_button">
+	            <input type="button" class="form-control add_new_event_button" value="取消">
 	        </div>
 	    </form>
 	</div>
@@ -224,9 +224,17 @@
 		function submit_or_cancel() {
 			$('.add_new_event_button').click(function() {
 				$('#new_event_form').css('display', 'none')
-				flag = flase
+				flag = false
 			})
 		}
+
+		$('#add_new_submit').click(function(){
+			$.post('/waste-class/new_waste', {'new_waste':$('#add_new_waste_name').val(),
+						'waste_class':$('#add_new_waste_class').val()},
+						function(data){
+							alert(data)
+						})
+		})
 
 
 	// 垃圾分类点地图导航逻辑

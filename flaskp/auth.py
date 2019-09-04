@@ -25,13 +25,13 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/', methods=['GET','POST'])
 def login():
-	res = Results()
 	db_auth = {u.name: u.password for u in User.objects.all()}
 	print('db_auth', db_auth)
 	if request.method == 'POST':
 		print(request.form)
 		username = request.form['username']
 		password = request.form['password']
+		# judge it is login or register
 		is_login = True if request.form['islogin'] == 'Login' else False
 
 		if is_login:
@@ -68,8 +68,9 @@ def logout():
 
 
 def login_required(view):
-	print('login_required')
-	print('view function', view.__name__)
+	# the authtication 	decorator
+	print('login_required authtication')
+	print('the original view function', view.__name__)
 	@functools.wraps(view)
 	def wrapped_view(*args, **kwargs):
 		print('login_required=====')

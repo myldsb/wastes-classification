@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template
+from flask import Flask
+from flask import render_template
 
 
 app = Flask(__name__)
@@ -30,4 +31,8 @@ app.register_blueprint(search.bp)
 
 from . import  exam
 app.register_blueprint(exam.bp)
+
+adppter = app.url_map.bind('localhost')
+print(adppter.match('/'))
+print(adppter.match('/')[0])
 

@@ -50,10 +50,5 @@ class WasteClassfication(Document):
 print([[i for i in j]  for j in WasteClassfication.objects(version='stable')])
 
 
-# single_records = SingleRecords(operation = '1', timestamp = '2')
-# user = UserAccessRecords(name='1234', login='1', logout='2', records=[single_records], visit=5)
-# user = user.objects.create()
-# user.save()
-
 
 

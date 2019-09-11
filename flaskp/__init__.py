@@ -1,6 +1,12 @@
 import os
+
 from flask import Flask
 from flask import render_template
+from gevent import monkey
+monkey.patch_all()
+
+from .log import logger
+
 
 
 app = Flask(__name__)
@@ -20,7 +26,7 @@ def index():
 
 from . import records
 
-# from . import auth
+
 app.register_blueprint(auth.bp)
 
 from . import guide

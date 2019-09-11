@@ -3,10 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-    <strong>以下內容待合入：</strong><br>
-    {{ merge_notification }}
+    <strong>以下內容待合入：</strong>
+    <div id="merge-data">
+        <ul>
+        </ul>
+    <button id="merge-agreement" style="text-decoration: none;">merge</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="merge-rejection" style="text-decoration: none;">reject</button>
+
+    </div>
+
 
 </body>
+
+<script>
+    var merge_notification = {{merge_notification|tojson}};
+	for (var i in merge_notification) {
+		 console.log(merge_notification[i])
+		 console.log(merge_notification[i].split('[')[1].split(']')[0])
+		// 四种垃圾分别对应颜色标识
+		if (merge_notification[i].split('[')[1].split(']')[0]==='有害垃圾'){
+			$('#merge-data').find('ul:first').append('<li>'+
+				merge_notification[i].split('[')[0] +
+				'<span style="color:red" > ['+merge_notification[i].split('[')[1].split(']')[0]+ ']' +'</span>'+
+                merge_notification[i].split('[')[1].split(']')[1] +
+                '</li')
+		}
+		else if (merge_notification[i].split('[')[1].split(']')[0]==='可回收垃圾'){
+			$('#merge-data').find('ul:first').append('<li>'+
+				merge_notification[i].split('[')[0] +
+				'<span style="color:red" > ['+merge_notification[i].split('[')[1].split(']')[0]+ ']' +'</span>'+
+                merge_notification[i].split('[')[1].split(']')[1] +
+                '</li')
+		}
+		else if (merge_notification[i].split('[')[1].split(']')[0]==='厨余垃圾'){
+			$('#merge-data').find('ul:first').append('<li>'+
+				merge_notification[i].split('[')[0] +
+				'<span style="color:red" > ['+merge_notification[i].split('[')[1].split(']')[0]+ ']' +'</span>'+
+                merge_notification[i].split('[')[1].split(']')[1] +
+                '</li')
+		}
+		else if (merge_notification[i].split('[')[1].split(']')[0]==='不可回收垃圾'){
+			$('#merge-data').find('ul:first').append('<li>'+
+				merge_notification[i].split('[')[0] +
+				'<span style="color:red" > ['+merge_notification[i].split('[')[1].split(']')[0]+ ']' +'</span>'+
+                merge_notification[i].split('[')[1].split(']')[1] +
+                '</li')
+		}
+	}
+
+	function merge(){
+	    $('#merge-agreement').click(function() {
+	        $.get('{{ url_for("waste-class.merge_agreement") }}', function(data){
+	            console.log(data.status === true)
+	                alert(data.msg)
+            })
+        })
+        $('#merge-rejection').click(function() {
+	        $.get('{{ url_for("waste-class.merge_rejection") }}', function(data){
+	            console.log(data.status === true)
+	                alert(data.msg)
+            })
+        })
+    }
+
+	merge()
+</script>
 </html>

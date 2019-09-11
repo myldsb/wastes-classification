@@ -104,14 +104,6 @@
 	<!-- 查询结果与页码显示 -->
 	<div id="search-res">
 		<ul class="search-data">
-			<!-- <li>{{waste_filter}}</li> -->
-			<!--<li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li> -->
 		</ul>
 		<ul class="pagination">
 		    <li><a href="#">&laquo;</a></li>
@@ -197,7 +189,7 @@
 				search_data[i].split('[')[0] +
 				'<span style="color:blue" > ['+search_data[i].split('[')[1]+'</span>'+'</li')
 		}
-		else if (search_data[i].split('[')[1]==='有害垃圾]'){
+		else if (search_data[i].split('[')[1]==='不可回收垃圾]'){
 			$('#search-res').find('ul:first').append('<li>'+
 				search_data[i].split('[')[0] +
 				'<span style="color:yellow" > ['+search_data[i].split('[')[1]+'</span>'+'</li')

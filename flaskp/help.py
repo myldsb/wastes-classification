@@ -1,5 +1,5 @@
 '''
-extra func
+useful funcs
 '''
 
 from . import app

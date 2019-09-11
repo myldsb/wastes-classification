@@ -1,3 +1,7 @@
+'''
+user records and overall records
+'''
+
 from . import app
 
 @app.before_request

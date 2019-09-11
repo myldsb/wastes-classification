@@ -1,1 +1,13 @@
-Implement garbage classification, garbage category query, recycle bin query and point store
+#### 垃圾分类网站
+---
+- 登录登录鉴权
+- 垃圾分类介绍：定义及投放标准
+- 垃圾分类指南：全国垃圾严重性地图，垃圾分类推广视频
+- 垃圾类别查询
+- 垃圾分类新增：管理员可以合入新增请求
+- 垃圾分类点查询：对接搞得地图API
+- 垃圾分类考试
+- 垃圾分类商城
+- 日志功能
+
+**当前正在求职，写一个Flask+gevent+uwsgi+mongodb的网站雏形。之前每天加班，且公司云桌面不能访问外网，导致几乎没有时间写git。希望以后有时间可以把这个项目完善**

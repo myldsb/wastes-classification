@@ -232,7 +232,12 @@
 			$.post('/waste-class/new_waste', {'new_waste':$('#add_new_waste_name').val(),
 						'waste_class':$('#add_new_waste_class').val()},
 						function(data){
-							alert(data)
+							if (data.status===true){
+							    alert(data.msg)
+                            }
+							else {
+							    alert(data.msg)
+                            }
 						})
 		})
 

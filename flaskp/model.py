@@ -45,6 +45,7 @@ class WasteClassfication(Document):
     name = StringField(required=True)
     category = StringField(required=True)
     version = StringField(required=True)
+    user = StringField()
 
 print([[i for i in j]  for j in WasteClassfication.objects(version='stable')])
 

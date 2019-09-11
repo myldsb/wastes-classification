@@ -8,9 +8,10 @@ from flask import url_for
 from flask import jsonify
 from flask import redirect
 from flask import current_app
+from flask import session
 from urllib.parse import urlparse
 
-from .model import WasteClassfication
+from .model import WasteClassfication, User
 from .help import Results
 
 bp = Blueprint('waste-class', __name__, url_prefix='/waste-class')
@@ -47,7 +48,24 @@ def index():
 def new_waste():
 	# new a waste classfication record
 	print(request.form)
-	WasteClassfication(name=request.form.get('new_waste'),
-					 _class=request.form.get('waste_class'),
-					 version='pending').save()
-	return 'sueccess'
+	res = Results()
+	try:
+		WasteClassfication(name=request.form.get('new_waste'),
+						 category=request.form.get('waste_class'),
+						 version='pending',
+						 user=session['username']).save()
+		return res.set_res(True, msg='添加成功，等待管理员合入')
+	except Exception as e:
+		return res.set_res(False, msg='添加失败，请联系管理员')
+
+@bp.route('/notification')
+def get_notification():
+	print(session['username'])
+	login_user = session['username']
+	if login_user in [i.name for i in User.objects(group='admin')]:
+		data = ['%s[%s]  提交者：%s'%(i.name,i.category,i.user) for i in WasteClassfication.objects(version='peding')]
+		return render_template('/search/notification.html', merge_notification=data)
+	else:
+		data = ['%s[%s]'%(i.name,i.category) for i in WasteClassfication.objects(version='pending',
+																						user=session['username'])]
+	return render_template('/search/notification.html', merge_notification=data)

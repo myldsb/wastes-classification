@@ -104,13 +104,6 @@
 	<!-- 查询结果与页码显示 -->
 	<div id="search-res">
 		<ul class="search-data">
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
-		    <li>西瓜霜[有害垃圾]</li>
 		</ul>
 		<ul class="pagination">
 		    <li><a href="#">&laquo;</a></li>
@@ -136,11 +129,11 @@
 	    <form class="bs-example" role="form">
 	        <div class="input-group input-group-lg">
 	            <span class="input-group-addon">垃圾</span>
-	            <input type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
+	            <input id="add_new_waste_name" type="text" class="form-control" placeholder="请输入你要新增的垃圾名">
 	        </div>
 	        <div class="input-group input-group-lg">
 	            <label class="input-group-addon">类别</label>
-	            <select class="form-control">
+	            <select id='add_new_waste_class' class="form-control">
 	                <option>可回收垃圾</option>
 	                <option>有害垃圾</option>
 	                <option>厨余垃圾</option>
@@ -148,8 +141,8 @@
 	            </select>
 	        </div>
 	        <div class="input-group input-group-lg">
-	            <input type="submit" class="form-control add_new_event_button">
-	            <input type="submit" class="form-control add_new_event_button" value="取消">
+	            <input id="add_new_submit" type="submit" class="form-control add_new_event_button">
+	            <input type="button" class="form-control add_new_event_button" value="取消">
 	        </div>
 	    </form>
 	</div>
@@ -176,6 +169,35 @@
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=45fa813aceec535a29a8834164cfe7ac"></script>
 
 <script type="text/javascript">
+	// 获取后端返回的查询结果
+	var search_data = {{waste_filter|tojson}};
+	for (var i in search_data) {
+		// console.log(search_data[i])
+		// 四种垃圾分别对应颜色标识
+		if (search_data[i].split('[')[1]==='有害垃圾]'){
+			$('#search-res').find('ul:first').append('<li>'+
+				search_data[i].split('[')[0] +
+				'<span style="color:red" > ['+search_data[i].split('[')[1]+'</span>'+'</li')
+		}
+		else if (search_data[i].split('[')[1]==='可回收垃圾]'){
+			$('#search-res').find('ul:first').append('<li>'+
+				search_data[i].split('[')[0] +
+				'<span style="color:green" > ['+search_data[i].split('[')[1]+'</span>'+'</li')
+		}
+		else if (search_data[i].split('[')[1]==='厨余垃圾]'){
+			$('#search-res').find('ul:first').append('<li>'+
+				search_data[i].split('[')[0] +
+				'<span style="color:blue" > ['+search_data[i].split('[')[1]+'</span>'+'</li')
+		}
+		else if (search_data[i].split('[')[1]==='不可回收垃圾]'){
+			$('#search-res').find('ul:first').append('<li>'+
+				search_data[i].split('[')[0] +
+				'<span style="color:yellow" > ['+search_data[i].split('[')[1]+'</span>'+'</li')
+		}
+	}
+
+
+
 	// 新增垃圾分类条目逻辑
 		// 点击相应链接,弹出新增垃圾分类条目面板
 		function add_new_event() {
@@ -194,9 +216,22 @@
 		function submit_or_cancel() {
 			$('.add_new_event_button').click(function() {
 				$('#new_event_form').css('display', 'none')
-				flag = flase
+				flag = false
 			})
 		}
+
+		$('#add_new_submit').click(function(){
+			$.post('/waste-class/new_waste', {'new_waste':$('#add_new_waste_name').val(),
+						'waste_class':$('#add_new_waste_class').val()},
+						function(data){
+							if (data.status===true){
+							    alert(data.msg)
+                            }
+							else {
+							    alert(data.msg)
+                            }
+						})
+		})
 
 
 	// 垃圾分类点地图导航逻辑
@@ -247,6 +282,8 @@
 	submit_or_cancel()
 	getAMap()
 	invokeAMap()
+
+
 </script>
 
 

@@ -1,5 +1,5 @@
 '''
-extra func
+useful funcs
 '''
 
 from . import app
@@ -9,16 +9,10 @@ class Visit:
 	total_count = 0
 
 
-@app.before_request
+@app.before_first_request
 def visit():
+	print('before_first_request=======')
 	Visit.total_count += 1
-
-	username = session.get('username')
-	if not username:
-		redirect('/auth/auth.html')
-	else:
-		g.username = username
-		g.password = session.get('password')
 
 
 class Results:

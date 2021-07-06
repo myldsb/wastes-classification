@@ -1,4 +1,9 @@
-from flask import Blueprint, render_template
+'''
+the waste guide moudle
+'''
+
+from flask import Blueprint
+from flask import render_template
 
 
 bp = Blueprint('guide', __name__, url_prefix='/guide')
